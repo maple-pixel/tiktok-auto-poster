@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>TikTokでログイン</title>
+</head>
+<body>
+  <h1>TikTok自動投稿ツール</h1>
+  <button id="login-btn">TikTokでログイン</button>
+
+  <script>
+    document.getElementById("login-btn").onclick = function() {
+      const client_key = "awkryb4bswuyit7y";
+      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/news/callback.html");
+      const scope = "user.info.basic+video.upload+video.publish";
+      const state = "123abc";
+      const auth_url =
+        "https://www.tiktok.com/v2/auth/authorize/?" +
+        "client_key=" + client_key +
+        "&response_type=code" +
+        "&scope=" + scope +
+        "&redirect_uri=" + redirect_uri +
+        "&state=" + state;
+      window.location.href = auth_url;
+    };
+  </script>
+</body>
+</html>
