@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>TikTokでログイン</title>
 </head>
 <body>
@@ -10,10 +10,10 @@
 
   <script>
     document.getElementById("login-btn").onclick = function() {
-      const client_key = "awkryb4bswuyit7y"; // TikTok開発者ポータルで取得したClient Key
-      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/"); // OAuthリダイレクトURI
-      const scope = "user.info.basic+video.upload+video.publish"; // 必要なスコープ
-      const state = "123abc"; // 任意の文字列（セキュリティ用）
+      const client_key = "awkryb4bswuyit7y"; // Client Key
+      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/sandbox_callback.html"); // OAuthリダイレクトURI
+      const scope = "user.info.basic+video.upload+video.publish";
+      const state = "123abc";
 
       const auth_url =
         "https://www.tiktok.com/v2/auth/authorize/?" +
