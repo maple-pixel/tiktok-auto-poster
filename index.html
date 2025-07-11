@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>TikTokでログイン</title>
+  <meta charset="UTF-8">
+  <title>TikTokテストログイン</title>
 </head>
 <body>
-  <h1>TikTok自動投稿ツール</h1>
-  <button id="login-btn">TikTokでログイン</button>
+  <button onclick="login()">TikTokでログインテスト</button>
 
   <script>
-    document.getElementById("login-btn").onclick = function() {
-      const client_key = "sbaw7fni4yc4uykrha"; // Client Key
-      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/"); // OAuthリダイレクトURI
+    function login() {
+      const client_key = "sbaw7fni4yc4uykrha";
+      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/");
       const scope = "user.info.basic+video.upload+video.publish";
-      const state = "123abc";
+      const state = "test123";
 
       const auth_url =
-        "https://www.tiktok.com/v2/auth/authorize/?" +
-        "client_key=" + client_key +
-        "&response_type=code" +
-        "&scope=" + scope +
-        "&redirect_uri=" + redirect_uri +
-        "&state=" + state;
+        `https://www.tiktok.com/v2/auth/authorize/?client_key=${client_key}&response_type=code&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
 
       window.location.href = auth_url;
-    };
+    }
   </script>
 </body>
 </html>
