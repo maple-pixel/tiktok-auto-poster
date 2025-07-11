@@ -2,22 +2,55 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>TikTokテストログイン</title>
+  <title>TikTok動画アップロードテスト</title>
 </head>
 <body>
   <button onclick="login()">TikTokでログインテスト</button>
+  <br><br>
+  <input type="file" id="videoFile">
+  <button onclick="uploadVideo()">動画をアップロード</button>
 
   <script>
-    function login() {
-      const client_key = "sbaw7fni4yc4uykrha";
-      const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/");
-      const scope = "user.info.basic"; // ←このスコープに修正
-      const state = "test123";
+    const client_key = "sbaw7fni4yc4uykrha";
+    const redirect_uri = encodeURIComponent("https://maple-pixel.github.io/tiktok-auto-poster/");
+    const scope = "user.info.basic,video.upload,video.publish";
+    const state = "test123";
 
+    function login() {
       const auth_url =
         `https://www.tiktok.com/v2/auth/authorize/?client_key=${client_key}&response_type=code&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
-
       window.location.href = auth_url;
+    }
+
+    function uploadVideo() {
+      const fileInput = document.getElementById('videoFile');
+      if (fileInput.files.length === 0) {
+        alert('動画ファイルを選択してください。');
+        return;
+      }
+
+      const videoFile = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('video', videoFile);
+
+      fetch('https://open-api.tiktok.com/share/video/upload/', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+        },
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.data && data.data.share_id){
+          alert('動画アップロード成功！Share ID: ' + data.data.share_id);
+        }else{
+          alert('アップロード失敗。' + JSON.stringify(data));
+        }
+      })
+      .catch(error => {
+        alert('エラーが発生しました。' + error);
+      });
     }
   </script>
 </body>
